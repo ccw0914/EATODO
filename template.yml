@@ -1,0 +1,25 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  sample:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: This is sample service
+    todo:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: index.handler
+        Runtime: nodejs12
+        Timeout: 60
+        MemorySize: 512
+        CodeUri: sample\todo
+      Events:
+        httpTrigger:
+          Type: HTTP
+          Properties:
+            AuthType: ANONYMOUS
+            Methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
